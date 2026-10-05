@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-shop_crm}
+      POSTGRES_USER: ${POSTGRES_USER:-shop}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-shop}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-shop} -d ${POSTGRES_DB:-shop_crm}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://${POSTGRES_USER:-shop}:${POSTGRES_PASSWORD:-shop}@postgres:5432/${POSTGRES_DB:-shop_crm}?sslmode=disable
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      BONUS_CASHBACK_PERCENT: ${BONUS_CASHBACK_PERCENT:-5}
+      BONUS_SPEND_LIMIT_PERCENT: ${BONUS_SPEND_LIMIT_PERCENT:-50}
+      SEED_ON_STARTUP: ${SEED_ON_STARTUP:-true}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+
+volumes:
+  postgres-data:
