@@ -1,0 +1,17 @@
+{
+  "name": "shop-crm",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": { "version": "1.23" },
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
+    "ghcr.io/devcontainers/features/postgres:1": { "version": "16" }
+  },
+  "forwardPorts": [5173, 8080, 5432],
+  "portsAttributes": {
+    "5173": { "label": "Till (Vite)", "onAutoForward": "openPreview" },
+    "8080": { "label": "API", "onAutoForward": "notify" },
+    "5432": { "label": "Postgres", "onAutoForward": "silent" }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "remoteUser": "vscode"
+}
