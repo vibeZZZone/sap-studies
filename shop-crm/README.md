@@ -3,8 +3,8 @@
 Учебное fullstack-приложение: касса, складской учёт, бонусные карты покупателей и
 история продаж. Источник истины по всем деньгам и остаткам — бэкенд.
 
-> English version: [README.en.md](README.en.md) · Architecture decisions:
-> [docs/decisions](docs/decisions)
+> English version: [README.en.md](README.en.md) · Architecture: [docs/architecture.md](docs/architecture.md) ·
+> Architecture decisions: [docs/decisions](docs/decisions)
 
 ## Возможности
 
@@ -161,6 +161,7 @@ shop-crm/
     src/pages/                 Till, Customers, Products, Sales
     src/components/            Receipt, ProductTile, Modal, AsyncBoundary
     src/lib/money.ts           форматирование и предпросмотр чека
+  docs/architecture.md        диаграммы: контекст, слои, ERD, транзакция, потоки
   docs/decisions/              ADR: почему Go, процент бонусов, i18n, блокировки
 ```
 

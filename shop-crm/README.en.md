@@ -3,8 +3,8 @@
 A fullstack study project: till, stock control, loyalty cards for customers, and sales
 history. The backend is the single source of truth for money and stock.
 
-> Русская версия: [README.md](README.md) · Architecture decisions:
-> [docs/decisions](docs/decisions)
+> Русская версия: [README.md](README.md) · Architecture: [docs/architecture.md](docs/architecture.md) ·
+> Architecture decisions: [docs/decisions](docs/decisions)
 
 ## Features
 
@@ -162,6 +162,7 @@ shop-crm/
     src/pages/                 Till, Customers, Products, Sales
     src/components/            Receipt, ProductTile, Modal, AsyncBoundary
     src/lib/money.ts           formatting and receipt preview
+  docs/architecture.md        diagrams: context, layers, ERD, transaction, flows
   docs/decisions/              ADRs: why Go, the bonus percent, i18n, locking
 ```
 
